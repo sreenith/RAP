@@ -1,0 +1,65 @@
+@Metadata.layer: #CORE
+@UI: {
+  headerInfo: {
+    typeName: 'Customer', 
+    typeNamePlural: 'Customers'
+  }
+}
+annotate view ZAP_C_CUST_BANK_00 with
+{
+  @UI.facet: [ {
+    id: 'idIdentification', 
+    type: #IDENTIFICATION_REFERENCE, 
+    label: 'Customer', 
+    position: 10 
+  } ]
+  @UI.hidden: true
+  customerUuid;
+  
+  @UI.lineItem: [ {
+    position: 10 , 
+    importance: #MEDIUM, 
+    label: 'RecordNumber'
+  } ]
+  @UI.identification: [ {
+    position: 10 , 
+    label: 'RecordNumber'
+  } ]
+  recordNumber;
+  
+  @UI.lineItem: [ {
+    position: 20 , 
+    importance: #MEDIUM, 
+    label: ''
+  } ]
+  @UI.identification: [ {
+    position: 20 , 
+    label: ''
+  } ]
+  kunnr;
+  
+  @UI.lineItem: [ {
+    position: 30 , 
+    importance: #MEDIUM, 
+    label: ''
+  } ]
+  @UI.identification: [ {
+    position: 30 , 
+    label: ''
+  } ]
+  bankn;
+  
+  @UI.lineItem: [ {
+    position: 40 , 
+    importance: #MEDIUM, 
+    label: ''
+  } ]
+  @UI.identification: [ {
+    position: 40 , 
+    label: ''
+  } ]
+  swift;
+  
+  @UI.hidden: true
+  localLastChangedAt;
+}

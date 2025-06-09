@@ -1,0 +1,56 @@
+managed with additional save implementation in class ZBP_I_TABLEFORSWIFTCODE_S unique;
+strict;
+with draft;
+
+define behavior for ZI_TableForSwiftCode_S alias TableForSwiftCodAll
+draft table ZAP_SWIFT_00_D_S
+with unmanaged save
+lock master total etag LastChangedAtMax
+authorization master( global )
+
+{
+  update;
+  internal create;
+  internal delete;
+
+  draft action ( features : instance ) Edit;
+  draft action Activate;
+  draft action Discard;
+  draft action Resume;
+  draft determine action Prepare;
+  action ( features : instance ) SelectCustomizingTransptReq parameter D_SelectCustomizingTransptReqP result [1] $self;
+
+  association _TableForSwiftCode { create ( features : instance ); with draft; }
+}
+
+define behavior for ZI_TableForSwiftCode alias TableForSwiftCode
+persistent table ZAP_SWIFT_00
+draft table ZAP_SWIFT_00_D
+etag master LocalLastChangedAt
+lock dependent by _TableForSwiftCodAll
+authorization dependent by _TableForSwiftCodAll
+
+{
+  field ( readonly )
+   SingletonID,
+   SwiftUuid;
+
+  field ( numbering : managed )
+   SwiftUuid;
+
+
+  update( features : global );
+  delete( features : global );
+
+  mapping for ZAP_SWIFT_00
+  {
+    SwiftUuid = SWIFT_UUID;
+    Swift = SWIFT;
+    LocalLastChangedAt = LOCAL_LAST_CHANGED_AT;
+    LastChangedAt = LAST_CHANGED_AT;
+  }
+
+  association _TableForSwiftCodAll { with draft; }
+
+  validation ValidateRecordChanges on save ##NOT_ASSIGNED_TO_DETACT { create; update; delete; }
+}

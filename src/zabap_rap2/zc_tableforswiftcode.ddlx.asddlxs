@@ -1,0 +1,37 @@
+@Metadata.layer: #CUSTOMER
+@UI: {
+  headerInfo: {
+    typeName: 'TableForSwiftCode', 
+    typeNamePlural: 'TableForSwiftCodes', 
+    title: {
+      type: #STANDARD, 
+      label: 'Table for Swift Code', 
+      value: 'SwiftUuid'
+    }
+  }
+}
+annotate view ZC_TableForSwiftCode with
+{
+  @UI.identification: [ {
+    position: 1 
+  } ]
+  @UI.lineItem: [ {
+    position: 1 
+  } ]
+  @UI.facet: [ {
+    id: 'ZI_TableForSwiftCode', 
+    purpose: #STANDARD, 
+    type: #IDENTIFICATION_REFERENCE, 
+    label: 'Table for Swift Code', 
+    position: 1 
+  } ]
+  SwiftUuid;
+  
+  @UI.identification: [ {
+    position: 2 
+  } ]
+  @UI.lineItem: [ {
+    position: 2 
+  } ]
+  Swift;
+}

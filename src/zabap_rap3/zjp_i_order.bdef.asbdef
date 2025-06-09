@@ -1,0 +1,43 @@
+unmanaged implementation in class zbp_jp_i_order unique;
+strict ( 2 );
+with draft;
+
+define behavior for ZJP_I_ORDER alias order
+draft table zjp_order_d
+//late numbering
+lock master total etag locallastchangedat
+authorization master ( instance )
+//etag master <field_name>
+{
+
+  field ( mandatory ) Ordertype, Customer;
+  field ( readonly ) Ordernumber, Status, locallastchangedat;
+
+  action ( features : instance ) set_status_conf result [1] $self;
+
+  draft action Resume;
+  //draft action Activate optimized;
+  draft action Activate;
+  draft action Edit;
+  draft action Discard;
+  draft determine action Prepare;
+
+  create;
+  update;
+  delete;
+  association _item { create; with draft; }
+}
+
+define behavior for ZJP_I_ITEM alias item
+draft table zjp_item_d
+//late numbering
+lock dependent by _order
+authorization dependent by _order
+//etag master <field_name>
+{
+  update;
+  delete;
+  field ( readonly ) Ordernumber, Itemnumber, locallastchangedat1;
+  field ( mandatory ) product, quantity, netamount;
+  association _order { with draft; }
+}

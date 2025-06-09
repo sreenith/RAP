@@ -1,0 +1,5 @@
+@MappingRole: true
+define role ZC_TableForSwiftCode {
+  grant select on ZC_TableForSwiftCode
+  where INHERITING CONDITIONS FROM ENTITY ZI_TableForSwiftCode;
+}

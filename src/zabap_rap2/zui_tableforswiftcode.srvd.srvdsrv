@@ -1,0 +1,4 @@
+define service ZUI_TABLEFORSWIFTCODE {
+  expose ZC_TABLEFORSWIFTCODE_S as TableForSwiftCodAll;
+  expose ZC_TABLEFORSWIFTCODE as TableForSwiftCode;
+}

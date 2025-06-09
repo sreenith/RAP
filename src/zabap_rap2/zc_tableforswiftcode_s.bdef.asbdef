@@ -1,0 +1,25 @@
+projection;
+strict;
+use draft;
+
+define behavior for ZC_TableForSwiftCode_S alias TableForSwiftCodAll
+
+{
+  use action Edit;
+  use action Activate;
+  use action Discard;
+  use action Resume;
+  use action Prepare;
+  use action SelectCustomizingTransptReq;
+
+  use association _TableForSwiftCode { create; with draft; }
+}
+
+define behavior for ZC_TableForSwiftCode alias TableForSwiftCode
+
+{
+  use update;
+  use delete;
+
+  use association _TableForSwiftCodAll { with draft; }
+}

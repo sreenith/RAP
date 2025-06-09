@@ -1,0 +1,103 @@
+@Metadata.layer: #CORE
+
+@UI: {
+    headerInfo: {  typeName: 'Order',
+                              typeNamePlural: 'Orders',
+                              title: {   type: #STANDARD, value: 'Ordernumber'     },
+                              description: {  value: 'Customer'  }
+    },
+    presentationVariant: [{  sortOrder: [{  by: 'Ordernumber',  direction: #ASC  }],
+                                                 visualizations: [{  type: #AS_LINEITEM  }]
+                                           }]
+   }
+
+@Search.searchable: true
+
+annotate view ZJP_C_ORDER with
+{
+
+  @UI.facet: [  {   label: 'Order Information',
+                               id: 'OrderInfo',
+                               type: #COLLECTION,  position: 10    },
+                          {    label: 'Order Header',
+                               id: 'Order',
+                               type: #IDENTIFICATION_REFERENCE,
+                               purpose: #STANDARD,
+                               parentId: 'OrderInfo',
+                               position: 10 },
+                          {    id: 'Items',
+                               purpose: #STANDARD,
+                               type: #LINEITEM_REFERENCE,
+                               label: 'Order Items',
+                               position: 20,
+                               targetElement: '_item'
+     } ]
+
+  @UI.lineItem: [{ position: 10 }]
+  @UI.identification: [{ position: 10 }]
+  @EndUserText.label: 'Order Number'
+  Ordernumber;
+
+  @UI.lineItem: [{ position: 20 }]
+  @UI.identification: [{ position: 20 }]
+  @EndUserText.label: 'Order Type'
+  @EndUserText.quickInfo: 'Enter Order Type'
+  Ordertype;
+
+  @UI.lineItem: [{ position: 30 }]
+  @UI.identification: [{ position: 30 }]
+  @UI.selectionField:  [{ position: 30 }]
+  @Search.defaultSearchElement: true      //Default search
+  @EndUserText.label: 'Sales Org.'
+  Salesorg;
+
+  @UI.lineItem: [{ position: 40 }]
+  @UI.identification: [{ position: 40 }]
+  @EndUserText.label: 'Dist. Channel'
+  Distchannel;
+
+  @UI.lineItem: [{ position: 50 }]
+  @UI.identification: [{ position: 50 }]
+  @EndUserText.label: 'Division'
+  Division;
+  @UI.lineItem: [{ position: 60 }]
+  @UI.identification: [{ position:60 }]
+  @UI.selectionField:  [{ position: 60 }]
+  @Search.defaultSearchElement: true      //Default search
+  @EndUserText.label: 'Customer'
+  Customer;
+
+  @UI.lineItem: [{ position: 70 }]
+  @UI.identification: [{ position: 70 }]
+  @EndUserText.label: 'Total Amount'
+  Grossamount;
+
+ // @UI.hidden: true
+ @UI.identification: [{ position: 75 }]
+  @Consumption.valueHelpDefinition: [ {
+    entity: {
+      name: 'I_CURRENCY',
+      element: 'Currency'
+    }
+  } ]
+ Currency;
+
+  @UI.lineItem: [{position: 80, importance: #HIGH } ,
+                              { type: #FOR_ACTION,
+                               dataAction: 'set_status_conf' ,
+                                label: 'Confirm Order'}]
+                                
+  @UI.identification: [{ position: 90 }]              
+  @EndUserText.label: 'Order Status'                 
+  Status;
+
+  @UI.lineItem: [{ position: 100 }]
+  @UI.identification: [{ position: 100 }]
+  @EndUserText.label: 'Last Changed at'
+  locallastchangedat;
+
+  @UI.hidden: true
+  lastchangedat;
+
+}
+  

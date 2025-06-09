@@ -1,0 +1,4 @@
+@EndUserText.label: 'Customer Service Definition'
+define service ZJP_UI_Customer_00 {
+  expose ZJP_C_CUSTOMER_00 as Customer;
+}

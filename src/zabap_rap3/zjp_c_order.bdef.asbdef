@@ -1,0 +1,27 @@
+projection;
+strict ( 2 );
+use draft;
+
+define behavior for ZJP_C_ORDER alias order
+{
+  use create;
+  use update;
+  use delete;
+
+  use action Resume;
+  use action Activate;
+  use action Edit;
+  use action Discard;
+  use action Prepare;
+
+  use action set_status_conf;
+
+  use association _item { create; with draft; }
+}
+
+define behavior for zjp_c_item alias item
+{
+  use update;
+  use delete;
+  use association _order { with draft; }
+}

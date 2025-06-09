@@ -1,0 +1,5 @@
+@EndUserText.label: 'SD'
+define service ZJP_UI_Order {
+  expose ZJP_C_ORDER as Orders;
+  expose zjp_c_item as Items;
+}

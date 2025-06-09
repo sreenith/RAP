@@ -1,0 +1,4 @@
+@EndUserText.label: 'Service definition forZAP_C_CUST_BANK_00'
+define service ZAP_UI_CUST_BANK_00 {
+  expose ZAP_C_CUST_BANK_00 as Customer;
+}

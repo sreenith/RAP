@@ -1,0 +1,54 @@
+managed implementation in class zcl_ap_cust_bank_00 unique;
+strict ( 1 );
+with draft;
+
+define behavior for ZAP_I_CUST_BANK_00 alias Customer
+persistent table zap_cust_bank_00
+draft table zap_cust_bank_D0
+etag master LocalLastChangedAt
+lock master total etag LastChangedAt
+authorization master( global )
+
+{
+  field ( mandatory : create )
+   RecordNumber;
+
+  field ( readonly )
+   CustomerUUID,
+   LocalCreatedAt,
+   LocalCreatedBy,
+   LastChangedAt,
+   LocalLastChangedAt,
+   LocalLastChangedBy;
+
+  field ( numbering : managed )
+   CustomerUUID;
+
+  field ( readonly : update )
+   RecordNumber;
+
+
+  create;
+  update;
+  delete;
+
+  draft action Edit;
+  draft action Activate;
+  draft action Discard;
+  draft action Resume;
+  draft determine action Prepare;
+
+  mapping for ZAP_CUST_BANK_00
+  {
+    CustomerUUID = CUSTOMER_UUID;
+    RecordNumber = RECORD_NUMBER;
+    Kunnr = KUNNR;
+    Bankn = BANKN;
+    Swift = SWIFT;
+    LocalCreatedBy = LOCAL_CREATED_BY;
+    LocalCreatedAt = LOCAL_CREATED_AT;
+    LocalLastChangedBy = LOCAL_LAST_CHANGED_BY;
+    LocalLastChangedAt = LOCAL_LAST_CHANGED_AT;
+    LastChangedAt = LAST_CHANGED_AT;
+  }
+}

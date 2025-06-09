@@ -1,0 +1,10 @@
+
+projection;
+strict ( 2 );
+
+define behavior for ZJP_C_CUSTOMER_00 alias Customer
+{
+  use create;
+  use update;
+  use delete;
+}
